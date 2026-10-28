@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#100a27">
+    <title>Sorry, My Lokkhi Pakhi ♡</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Pacifico&display=swap');
+
+        :root {
+            --pink: #ff77bd;
+            --pale: #ffd6ec;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            color: #fff6ff;
+            font-family: Manrope, sans-serif;
+            background: radial-gradient(ellipse at 50% 10%,
+                    #32205f 0, #171137 42%, #090719 100%);
+            overflow-x: hidden;
+        }
+
+        #sky,
+        #floaties {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        #sky {
+            z-index: 0;
+        }
+
+        #floaties {
+            z-index: 10;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 0 9px white;
+            animation: twinkle 2s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            to {
+                opacity: .15;
+                transform: scale(.5);
+            }
+        }
+
+        .heart {
+            position: absolute;
+            bottom: -50px;
+            color: #ff9dd3;
+            text-shadow: 0 0 15px #ff59bd;
+            animation: rise linear forwards;
+        }
+
+        @keyframes rise {
+            to {
+                transform: translateY(-115vh) rotate(35deg);
+                opacity: 0;
+            }
+        }
+
+        .top {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: min(1100px, 92%);
+            margin: auto;
+            padding: 22px 0;
+        }
+
+        .logo {
+            font-weight: 800;
+        }
+
+        .logo b {
+            color: var(--pink);
+            font-size: 1.35rem;
+        }
+
+        .tag {
+            border: 1px solid #ffb7e65c;
+            border-radius: 50px;
+            padding: 9px 14px;
+            background: #ffffff08;
+            font-size: .75rem;
+            color: #ffe0f3;
+        }
+
+        main {
+            position: relative;
+            z-index: 1;
+            width: min(1100px, 92%);
+            margin: auto;
+        }
+
+        .hero {
+            min-height: calc(100vh - 80px);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 30px;
+            padding: 30px 0 65px;
+        }
+
+        .copy {
+            position: relative;
+            z-index: 2;
+        }
+
+        .eyebrow {
+            text-transform: uppercase;
+            letter-spacing: .22em;
+            font-size: .7rem;
+            color: #d7b8ff;
+            margin-bottom: 18px;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 7vw, 6rem);
+            line-height: 1.02;
+            letter-spacing: -.07em;
+            margin: 0;
+            font-weight: 800;
+        }
+
+        h1 em {
+            font-family: Pacifico, cursive;
+            color: var(--pink);
+            font-weight: 400;
+            text-shadow: 0 0 28px #ff5fb866;
+        }
+
+        .lead {
+            color: #d8cce9;
+            line-height: 1.8;
+            max-width: 440px;
+            margin: 22px 0 26px;
+            font-size: 1rem;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            font: 700 .9rem Manrope, sans-serif;
+            cursor: pointer;
+            border: 0;
+            border-radius: 50px;
+            padding: 14px 19px;
+            transition: transform .25s, box-shadow .25s;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        button:hover {
+            transform: translateY(-4px) scale(1.025);
+        }
+
+        .yes {
+            background: linear-gradient(120deg, #ffdbef, #ff68b5);
+            color: #35102c;
+            box-shadow: 0 8px 28px #ff5fb84a;
+            animation: softPulse 2.5s ease-in-out infinite;
+        }
+
+        @keyframes softPulse {
+            50% {
+                box-shadow: 0 8px 38px #ff5fb878;
+            }
+        }
+
+        .wait {
+            background: #ffffff0b;
+            border: 1px solid #dcb4ff65;
+            color: #ffeaff;
+            touch-action: manipulation;
+            position: relative;
+        }
+
+        .tiny {
+            font-size: .78rem;
+            color: #a99cbd;
+            margin-top: 16px;
+        }
+
+        .stage {
+            position: relative;
+            min-height: 480px;
+            display: grid;
+            place-items: center;
+            isolation: isolate;
+        }
+
+        .glow {
+            position: absolute;
+            width: min(440px, 90%);
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: radial-gradient(circle,
+                    #ff70c02a 0, #a47aff15 45%, transparent 70%);
+            filter: blur(10px);
+        }
+
+        .moon {
+            position: absolute;
+            top: 25px;
+            right: 15%;
+            font-size: 3rem;
+            filter: drop-shadow(0 0 20px #fff2a8);
+            animation: moonfloat 5s ease-in-out infinite;
+        }
+
+        @keyframes moonfloat {
+            50% {
+                transform: translateY(-9px) rotate(5deg);
+            }
+        }
+
+        .scene {
+            position: relative;
+            width: min(430px, 100%);
+            height: 390px;
+        }
+
+        .cloud {
+            position: absolute;
+            bottom: 30px;
+            left: 5%;
+            width: 90%;
+            height: 90px;
+            border-radius: 50%;
+            background: linear-gradient(180deg, #4e347c, #251a4e);
+            box-shadow: 0 0 50px #c45fce20;
+        }
+
+        .character {
+            position: absolute;
+            bottom: 68px;
+            width: 155px;
+            height: 220px;
+            animation: bob 3s ease-in-out infinite;
+            transform-origin: bottom;
+        }
+
+        @keyframes bob {
+            50% {
+                transform: translateY(-7px);
+            }
+        }
+
+        .boy {
+            left: 35px;
+            z-index: 2;
+            animation-delay: -1s;
+        }
+
+        .girl {
+            right: 24px;
+            z-index: 1;
+            animation-delay: -.3s;
+        }
+
+        .head {
+            position: absolute;
+            top: 4px;
+            left: 20px;
+            width: 118px;
+            height: 116px;
+            border-radius: 48% 48% 45% 45%;
+            background: linear-gradient(145deg, #ffd6bd, #eea17e);
+            box-shadow: inset -10px -7px 0 #b85f6d22;
+        }
+
+        .hair {
+            position: absolute;
+            top: -7px;
+            left: 12px;
+            width: 132px;
+            height: 62px;
+            border-radius: 60% 50% 25% 25%;
+            background: linear-gradient(145deg, #30213f, #110d25);
+            z-index: 2;
+        }
+
+        .hair:before,
+        .hair:after {
+            content: "";
+            position: absolute;
+            background: #211631;
+            border-radius: 60% 40% 50% 20%;
+            width: 48px;
+            height: 47px;
+            top: 17px;
+        }
+
+        .hair:before {
+            left: 0;
+            transform: rotate(-18deg);
+        }
+
+        .hair:after {
+            right: 3px;
+            transform: rotate(20deg);
+        }
+
+        .boy .hair {
+            height: 53px;
+            transform: rotate(-4deg);
+        }
+
+        .boy .hair:after {
+            top: 8px;
+            right: 12px;
+        }
+
+        .eye {
+            position: absolute;
+            top: 55px;
+            width: 10px;
+            height: 15px;
+            border-radius: 50%;
+            background: #29162d;
+            z-index: 3;
+        }
+
+        .eye:after {
+            content: "";
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 3px;
+            height: 4px;
+            border-radius: 50%;
+            background: white;
+        }
+
+        .eye.l {
+            left: 35px;
+        }
+
+        .eye.r {
+            right: 35px;
+        }
+
+        .blush {
+            position: absolute;
+            top: 75px;
+            left: 15px;
+            width: 23px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ff7f9c66;
+            filter: blur(3px);
+        }
+
+        .blush:after {
+            content: "";
+            position: absolute;
+            left: 68px;
+            width: 23px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ff7f9c66;
+        }
+
+        .mouth {
+            position: absolute;
+            top: 79px;
+            left: 53px;
+            width: 15px;
+            height: 8px;
+            border-bottom: 2px solid #a94f64;
+            border-radius: 50%;
+        }
+
+        .body {
+            position: absolute;
+            top: 105px;
+            left: 10px;
+            width: 138px;
+            height: 118px;
+            border-radius: 42px 42px 15px 15px;
+            background: linear-gradient(145deg, #353052, #17142e);
+            box-shadow: inset 0 8px 0 #ffffff0b;
+        }
+
+        .girl .body {
+            background: linear-gradient(145deg, #ff8dc9, #a84fba);
+        }
+
+        .girl .hair {
+            height: 88px;
+            width: 140px;
+            left: 8px;
+            top: -10px;
+            border-radius: 55% 55% 35% 35%;
+        }
+
+        .girl .hair:before {
+            height: 130px;
+            width: 38px;
+            top: 43px;
+            left: 1px;
+            border-radius: 30px;
+            transform: rotate(8deg);
+        }
+
+        .girl .hair:after {
+            height: 135px;
+            width: 37px;
+            top: 43px;
+            right: 0;
+            border-radius: 30px;
+            transform: rotate(-8deg);
+        }
+
+        .girl .head {
+            z-index: 1;
+        }
+
+        .girl .eye {
+            top: 57px;
+        }
+
+        .girl .mouth {
+            top: 83px;
+            width: 17px;
+            height: 5px;
+            border-bottom: 0;
+            border-top: 2px solid #a94f64;
+            transform: rotate(8deg);
+        }
+
+        .girl .arms {
+            position: absolute;
+            z-index: 4;
+            top: 126px;
+            left: 9px;
+            width: 137px;
+            height: 29px;
+            border-radius: 30px;
+            background: #ffb0d8;
+            transform: rotate(-10deg);
+            box-shadow: 0 0 0 2px #e875b3;
+        }
+
+        .girl .arms:after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 2px;
+            width: 90px;
+            height: 24px;
+            border-radius: 30px;
+            background: #ffb0d8;
+            transform: rotate(24deg);
+        }
+
+        .boy .arms {
+            position: absolute;
+            z-index: 4;
+            top: 132px;
+            left: -1px;
+            width: 146px;
+            height: 25px;
+            border-radius: 30px;
+            background: #26213f;
+            transform: rotate(-16deg);
+        }
+
+        .boy .arms:after {
+            content: "";
+            position: absolute;
+            right: -6px;
+            top: -10px;
+            width: 50px;
+            height: 25px;
+            border-radius: 20px;
+            background: #f3b08f;
+            transform: rotate(30deg);
+        }
+
+        .flower {
+            position: absolute;
+            z-index: 5;
+            left: 130px;
+            top: 154px;
+            font-size: 3rem;
+            transform: rotate(-20deg);
+            filter: drop-shadow(0 0 10px #ff90c7);
+            animation: offer 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes offer {
+            to {
+                transform: translate(8px, -7px) rotate(-10deg);
+            }
+        }
+
+        .scribble {
+            position: absolute;
+            color: #ffb5e6;
+            font-family: Pacifico, cursive;
+            text-shadow: 0 0 12px #ff66c5;
+            animation: bob 4s ease-in-out infinite;
+        }
+
+        .s1 {
+            top: 48px;
+            left: 5px;
+            font-size: 1.3rem;
+        }
+
+        .s2 {
+            top: 115px;
+            right: 0;
+            font-size: 1rem;
+            animation-delay: -1s;
+        }
+
+        .s3 {
+            bottom: 3px;
+            left: 25%;
+            font-size: 1.1rem;
+        }
+
+        .section {
+            padding: 45px 0 65px;
+            text-align: center;
+        }
+
+        .mini {
+            color: #d7b8ff;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            font-size: .7rem;
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            margin: 12px 0;
+            color: #fff0fb;
+        }
+
+        .promise {
+            color: #cbbddd;
+            line-height: 1.8;
+            margin: 0 auto;
+            max-width: 550px;
+        }
+
+        .response {
+            min-height: 36px;
+            color: #ffc7e7;
+            margin-top: 22px;
+            font-weight: 600;
+        }
+
+        footer {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: #9386ad;
+            padding: 22px;
+            font-size: .78rem;
+        }
+
+        @media(max-width:760px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding-top: 25px;
+                gap: 5px;
+            }
+
+            .copy {
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+            }
+
+            .lead {
+                max-width: 510px;
+            }
+
+            .stage {
+                min-height: 430px;
+            }
+
+            .scene {
+                transform: scale(.91);
+                transform-origin: top center;
+            }
+
+            .moon {
+                right: 12%;
+                top: 8px;
+            }
+
+            .s1 {
+                left: 4%;
+            }
+
+            .s2 {
+                right: 1%;
+            }
+
+            .top {
+                padding: 16px 0;
+            }
+
+            .tag {
+                font-size: .65rem;
+            }
+        }
+
+        @media(max-width:390px) {
+            h1 {
+                font-size: 3.15rem;
+            }
+
+            .stage {
+                min-height: 380px;
+            }
+
+            .scene {
+                transform: scale(.79);
+                transform-origin: top center;
+                width: 430px;
+                max-width: 130vw;
+            }
+
+            .buttons {
+                justify-content: center;
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+
+            *,
+            *:before,
+            *:after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="sky"></div>
+    <div class="floaties" id="floaties"></div>
+
+    <header class="top">
+        <div class="logo"><b>♥</b> My Lokkhi Pakhi ♡</div>
+        <div class="tag">♥ ONLY FOR YOU ♥</div>
+    </header>
+
+    <main>
+        <section class="hero">
+
+            <div class="copy">
+                <div class="eyebrow">a tiny website · a very big sorry</div>
+
+                <h1>Sorry,<br><em>My Lokkhi</em><br>Pakhi ♡</h1>
+
+                <p class="lead">
+                    Rag koro na, shona… 🥺<br>
+                    Tumi chara amar kichui bhalo lage na.<br>
+                    Ekta hug diye rag-ta bhangiye dei? 🌷
+                </p>
+
+                <div class="buttons">
+                    <button class="yes" onclick="forgive()">
+                        Acha, thik ache 💗
+                    </button>
+
+                    <button class="wait" id="angryBtn" onclick="waitForHer()">
+                        Ekhono rag! 😤
+                    </button>
+                </div>
+
+                <div class="tiny">
+                    P.S. Amar pagli bou-ta amar favourite person. Always. ✨
+                </div>
+            </div>
+
+            <div class="stage">
+                <div class="glow"></div>
+                <div class="moon">☾</div>
+
+                <div class="scribble s1">Please… forgive me ♡</div>
+                <div class="scribble s2">Hmm… dekhi! 😤</div>
+                <div class="scribble s3">You + Me = ♡</div>
+
+                <div class="scene">
+                    <div class="cloud"></div>
+
+                    <div class="character boy">
+                        <div class="hair"></div>
+                        <div class="head">
+                            <i class="eye l"></i>
+                            <i class="eye r"></i>
+                            <i class="blush"></i>
+                            <i class="mouth"></i>
+                        </div>
+                        <div class="body"></div>
+                        <div class="arms"></div>
+                    </div>
+
+                    <div class="flower">💐</div>
+
+                    <div class="character girl">
+                        <div class="hair"></div>
+                        <div class="head">
+                            <i class="eye l"></i>
+                            <i class="eye r"></i>
+                            <i class="blush"></i>
+                            <i class="mouth"></i>
+                        </div>
+                        <div class="body"></div>
+                        <div class="arms"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="mini">one little promise</div>
+            <h2>Tomar rag-o amar kache special. 🫶</h2>
+
+            <p class="promise">
+                Tumi ready holei kotha bolbo, Lokkhi.
+                Tomake force korbo na—shudhu chai,
+                amra abar ekshathe hashi. 💞
+            </p>
+
+            <div class="response" id="response" aria-live="polite"></div>
+        </section>
+    </main>
+
+    <footer>
+        made with love, a little guilt & lots of hugs
+        · Always You ♥ Always Us
+    </footer>
+
+    <script>
+        /* Background stars */
+        const sky = document.querySelector("#sky");
+        const floaties = document.querySelector("#floaties");
+
+        for (let i = 0; i < 100; i++) {
+            const s = document.createElement("i");
+            s.className = "star";
+            s.style.left = Math.random() * 100 + "%";
+            s.style.top = Math.random() * 100 + "%";
+            s.style.opacity = 0.2 + Math.random() * 0.8;
+            s.style.animationDelay = Math.random() * 4 + "s";
+            sky.appendChild(s);
+        }
+
+        /* Floating hearts */
+        function floatHeart() {
+            const h = document.createElement("span");
+            h.className = "heart";
+            h.textContent = ["♡", "♥", "✦", "💗"][
+                Math.floor(Math.random() * 4)
+            ];
+
+            h.style.left = Math.random() * 100 + "%";
+            h.style.fontSize = 14 + Math.random() * 24 + "px";
+            h.style.animationDuration = 5 + Math.random() * 5 + "s";
+
+            floaties.appendChild(h);
+            setTimeout(() => h.remove(), 10500);
+        }
+
+        setInterval(floatHeart, 500);
+
+        /* Heart celebration */
+        function burst() {
+            for (let i = 0; i < 35; i++) {
+                setTimeout(() => {
+                    const h = document.createElement("span");
+                    h.className = "heart";
+                    h.textContent = ["💗", "💕", "♡", "🌸"][i % 4];
+                    h.style.left = 25 + Math.random() * 50 + "%";
+                    h.style.fontSize = 18 + Math.random() * 24 + "px";
+                    h.style.animationDuration = 3 + Math.random() * 2 + "s";
+
+                    floaties.appendChild(h);
+                    setTimeout(() => h.remove(), 5500);
+                }, i * 45);
+            }
+        }
+
+        /* Forgiveness button */
+        function forgive() {
+            document.getElementById("response").textContent =
+                "Yayyy! 🥹💗 Esho, ekta virtual hug dei! I love you, amar Lokkhi Pakhi!";
+
+            burst();
+        }
+
+        /* Runaway angry button */
+        const angryBtn = document.getElementById("angryBtn");
+        let tries = 0;
+        let isDodging = false;
+
+        const dodgeMessages = [
+            "Dhorte parba na 😜",
+            "Ekhono rag! 😤",
+            "Hehe, miss korla! 💨",
+            "Abar dhoro! 💗",
+            "Ufff, dhore felo na 🥹",
+            "Okay baba, dhora dilam 🙈"
+        ];
+
+        function runAway(event) {
+            // After six dodges, allow the next click to work normally.
+            if (tries >= 6 || isDodging) return;
+
+            if (event && event.cancelable) {
+                event.preventDefault();
+            }
+
+            isDodging = true;
+            tries++;
+
+            angryBtn.style.position = "fixed";
+            angryBtn.style.zIndex = "9999";
+            angryBtn.style.margin = "0";
+            angryBtn.style.transition =
+                "left .22s ease, top .22s ease, transform .22s ease";
+
+            // Keep the button inside the visible screen.
+            const maxX = Math.max(8, window.innerWidth - angryBtn.offsetWidth - 8);
+            const maxY = Math.max(8, window.innerHeight - angryBtn.offsetHeight - 8);
+
+            angryBtn.style.left = Math.random() * maxX + "px";
+            angryBtn.style.top = Math.random() * maxY + "px";
+            angryBtn.style.transform =
+                "rotate(" + (Math.random() * 18 - 9) + "deg) scale(1.04)";
+
+            angryBtn.textContent = dodgeMessages[tries - 1];
+
+            if (tries === 6) {
+                setTimeout(() => {
+                    angryBtn.style.position = "relative";
+                    angryBtn.style.left = "";
+                    angryBtn.style.top = "";
+                    angryBtn.style.margin = "";
+                    angryBtn.style.transform = "";
+                    angryBtn.textContent = "Thik ache baba 🥹💗";
+
+                    // Now the button can be pressed normally.
+                    angryBtn.onclick = waitForHer;
+                    isDodging = false;
+                }, 550);
+            } else {
+                setTimeout(() => {
+                    isDodging = false;
+                }, 260);
+            }
+        }
+
+        /* Desktop: run away when the pointer reaches the button.
+           Mobile: run away on touch. */
+        angryBtn.addEventListener("pointerenter", (event) => {
+            if (event.pointerType === "mouse") {
+                runAway(event);
+            }
+        });
+
+        angryBtn.addEventListener("touchstart", runAway, {
+            passive: false
+        });
+
+        /* After the button finally gives up */
+        function waitForHer() {
+            document.getElementById("response").textContent =
+                "Acha shona, time nao. 🥺 Ami ekhanei achi—tomar rag komle amake ekta hug dio. 🤍";
+
+            burst();
+        }
+    </script>
+</body>
+
+</html>
