@@ -829,12 +829,15 @@
             burst();
         }
 
-        /* Runaway angry button */
-        const angryBtn = document.getElementById("angryBtn");
-        let tries = 0;
-        let isDodging = false;
 
-        const dodgeMessages = [
+        /* Mobile + Desktop Runaway Button 💗 */
+        const angryBtn = document.getElementById("angryBtn");
+
+        let tries = 0;
+        let moving = false;
+        let lastMove = 0;
+
+        const messages = [
             "Dhorte parba na 😜",
             "Ekhono rag! 😤",
             "Hehe, miss korla! 💨",
@@ -843,33 +846,41 @@
             "Okay baba, dhora dilam 🙈"
         ];
 
-        function runAway(event) {
-            // After six dodges, allow the next click to work normally.
-            if (tries >= 6 || isDodging) return;
+        function runAway() {
+            if (tries >= 6 || moving) return;
 
-            if (event && event.cancelable) {
-                event.preventDefault();
-            }
+            const now = Date.now();
+            if (now - lastMove < 300) return;
 
-            isDodging = true;
+            lastMove = now;
+            moving = true;
             tries++;
 
             angryBtn.style.position = "fixed";
             angryBtn.style.zIndex = "9999";
             angryBtn.style.margin = "0";
             angryBtn.style.transition =
-                "left .22s ease, top .22s ease, transform .22s ease";
+                "left .20s ease, top .20s ease, transform .20s ease";
 
-            // Keep the button inside the visible screen.
-            const maxX = Math.max(8, window.innerWidth - angryBtn.offsetWidth - 8);
-            const maxY = Math.max(8, window.innerHeight - angryBtn.offsetHeight - 8);
+            const maxX = Math.max(
+                5, window.innerWidth - angryBtn.offsetWidth - 5
+            );
 
-            angryBtn.style.left = Math.random() * maxX + "px";
-            angryBtn.style.top = Math.random() * maxY + "px";
+            const maxY = Math.max(
+                5, window.innerHeight - angryBtn.offsetHeight - 5
+            );
+
+            // Finger/mouse theke dure notun jaygay palabe
+            angryBtn.style.left =
+                Math.random() * maxX + "px";
+
+            angryBtn.style.top =
+                Math.random() * maxY + "px";
+
             angryBtn.style.transform =
-                "rotate(" + (Math.random() * 18 - 9) + "deg) scale(1.04)";
+                "rotate(" + (Math.random() * 16 - 8) + "deg)";
 
-            angryBtn.textContent = dodgeMessages[tries - 1];
+            angryBtn.textContent = messages[tries - 1];
 
             if (tries === 6) {
                 setTimeout(() => {
@@ -880,36 +891,60 @@
                     angryBtn.style.transform = "";
                     angryBtn.textContent = "Thik ache baba 🥹💗";
 
-                    // Now the button can be pressed normally.
-                    angryBtn.onclick = waitForHer;
-                    isDodging = false;
-                }, 550);
+                    // Ebar click korle message dekhabe
+                    moving = false;
+                }, 500);
             } else {
                 setTimeout(() => {
-                    isDodging = false;
-                }, 260);
+                    moving = false;
+                }, 250);
             }
         }
 
-        /* Desktop: run away when the pointer reaches the button.
-           Mobile: run away on touch. */
-        angryBtn.addEventListener("pointerenter", (event) => {
-            if (event.pointerType === "mouse") {
-                runAway(event);
+        // Desktop: mouse button-er upor gele palabe
+        angryBtn.addEventListener("pointerenter", (e) => {
+            if (e.pointerType === "mouse") {
+                runAway();
             }
         });
 
-        angryBtn.addEventListener("touchstart", runAway, {
-            passive: false
-        });
+        // Mobile: button touch korlei palabe
+        angryBtn.addEventListener("touchstart", (e) => {
+            if (tries < 6) {
+                e.preventDefault();
+                runAway();
+            }
+        }, { passive: false });
 
-        /* After the button finally gives up */
+        // Mobile: finger diye screen-e move korleo,
+        // button-er khub kache ele palabe
+        document.addEventListener("touchmove", (e) => {
+            if (tries >= 6 || moving) return;
+
+            const touch = e.touches[0];
+            const rect = angryBtn.getBoundingClientRect();
+
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            const distance = Math.hypot(
+                touch.clientX - centerX,
+                touch.clientY - centerY
+            );
+
+            if (distance < 95) {
+                runAway();
+            }
+        }, { passive: true });
+
+        // Touch/click diye sheshe dhorte parle
         function waitForHer() {
             document.getElementById("response").textContent =
-                "Acha shona, time nao. 🥺 Ami ekhanei achi—tomar rag komle amake ekta hug dio pleasee pakhii 🤍";
+                "Acha shona 🥹💗 Esho, ekta hug dei! Tomar rag komano amar duty, Lokkhi Pakhi! 🫶";
 
             burst();
         }
+
     </script>
 </body>
 
